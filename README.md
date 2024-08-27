@@ -1,2 +1,2 @@
-# RSYC-ForestSAT2014
+# RSYC-ForestSAT2024
 Presentation on Remote Sensing-based Yield Curves (RSYC).
