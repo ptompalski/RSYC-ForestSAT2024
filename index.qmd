@@ -1,0 +1,384 @@
+---
+title: ""
+author: ""
+format:
+  revealjs:
+    self-contained: true
+    theme: simple
+    embed-resources: true
+    logo: images\NRCan_CFS_logo_PT_englishOnly_small.png
+    footer: "Tompalski et al., Remote Sensing-based Yield Curves | piotr.tompalski@nrcan-rncan.gc.ca"
+    margin: 0.1
+    slide-number: true
+    show-slide-number: all
+    scrollable: false
+    chalkboard: false
+    revealjs-plugins:
+     - plugin/fullscreen
+    css: assets/style.css
+editor: source
+bibliography: references.bib
+fig-dpi: 300
+---
+
+```{r}
+#| echo: false
+#| eval: true
+#| include: false
+
+library(tidyverse)
+library(ggplot2)
+
+
+set.seed(1)
+
+knitr::opts_chunk$set(dev = "ragg_png")
+
+
+
+# source("../../7_RS_AGB/code/0000_setup.R")
+# source("../../7_RS_AGB/code/9999_functions_modeling.R")
+
+
+```
+
+#  {background-color="white"}
+
+::: title-center
+Remote Sensing-based Aboveground Biomass Yield Curves for Dominant Boreal Tree species
+:::
+
+::: threequarters-image
+![](images/authors.png){fig-alt="authors"}
+:::
+
+::: half-image
+![](images/NRCan_CFS_logo_PT.png){fig-alt="NRCan-CFS-logo"}
+:::
+
+::: footer
+:::
+
+
+## Yield curves & growth simulators
+
+::: {.notes}
+Speaker notes go here.
+:::
+
+::: columns
+::: {.column width="50%"}
+-   function of age & species
+-   project forest attributes into the future
+:::
+
+::: {.column width="50%"}
+```{r, fig.asp=1, fig.width=4}
+
+CRdeclining <- function(age, b1, b2, b3) { 
+  b1 * exp(-b2 * age) * (1 - exp(-b2 * age))^b3
+  # Fortin, M., & Lavoie, J.-F. (2022). Reconciling individual-based forest growth models with landscape-level studies through a meta-modelling approach. Canadian Journal of Forest Research. https://doi.org/10.1139/cjfr-2022-0002
+}
+
+CR <- function(age, b1, b2, b3) { #Chapman-Richards
+  b1 * (1 - exp(-b2 * age))^b3
+}
+
+
+
+ggplot(data=NULL) + 
+  geom_line(data=NULL, aes(x=1:150, y=CRdeclining(1:150, 700, 0.005 , 0.8)))+
+  geom_line(data=NULL, aes(x=1:150, y=CRdeclining(1:150, 700, 0.004 , 0.9)))+
+  geom_line(data=NULL, aes(x=1:150, y=CRdeclining(1:150, 500, 0.008 , 0.9)))+
+  labs(x="Age", y="e.g. AGB")
+
+```
+:::
+:::
+
+## NFCMARS
+
+::: columns
+::: {.column width="60%"}
+![https://natural-resources.canada.ca/climate-change/climate-change-impacts-forests/carbon-accounting/13087](images/CBMCFS3.png){fig-alt="CBM-CFS3 architecture"}
+:::
+
+::: {.column .text60 width="40%"}
+NFCMARS is designed to:
+
+-   estimate past changes in forest carbon stocks, such as from 1990 to the present (**monitoring**)
+
+-   predict changes in carbon stocks, based on scenarios of future disturbance rates and management actions, in the next 2 to 3 decades (**projection**)
+:::
+:::
+
+##  {.center fullscreen="true"}
+
+![](images/growthSimulatorsCanada.png)
+
+::: footer
+:::
+
+## Existing models - limitations
+
+-   spatial extent (single jurisdiction, Canada-wide)
+
+-   developed for the dominant (most common) species only
+
+-   developed for managed forests
+
+-   often based on a limited number of samples
+
+## [Aim: remote sensing-based yield curves (RSYC)]{.r-fit-text}
+
+-   Entire Canada <small>(all treed pixels)</small>
+
+-   Species-specific <small>(not only most common tree species)</small>
+
+-   Consistent methodology
+
+-   Locally representative
+
+-   Fine level of detail
+
+-   Designed to work with RS data
+
+## Data
+
+::: center
+![](images/data.png)
+:::
+
+::: text60
+-   Landsat-derived **AGB** time series (1984-2021) [@matasci_large-area_2018]
+-   Landsat-derived **age** [@maltman_estimating_2023]
+-   Landsat-derived **species** [@hermosilla_mapping_2022]
+:::
+
+## Study area
+
+![](images/studyArea.png){fig-align="center"}
+
+
+## Approach
+
+::: columns
+::: {.column width="60%"}
+
+-   build a chronosequence of AGB by combining multiple pixel-level AGB time series
+-   develop a filtering approach to screen Landsat-derived AGB for unreasonably high values, growth rates etc
+-   fit non-linear mix effects models (NLME)
+
+:::
+
+::: {.column width="40%"}
+
+:::
+:::
+<!-- ![](images/filteringSteps_Slides.png){.absolute top=0 right=0 width="500" height="900"} -->
+<!-- ![](images/filteringSteps_Slides.png){.absolute top=0 right=0 width="400"} -->
+![](images/filteringSteps_Slides.png){.absolute top=0 right=0 height="100%"}
+
+
+## Filtering {visibility="hidden"}
+
+![](images/RSYC_filtering_4.png)
+
+## Filtering {visibility="hidden"}
+
+![](images/RSYC_filtering_4b.png)
+
+## Filtering {visibility="hidden"}
+
+![](images/ClassPixBroad.png)
+
+## Modeling
+
+::: columns
+::: {.column width="60%"}
+Model form after [@fortin_reconciling_2022]:
+
+$$
+AGB = \beta_1  e^{-\beta_2 age}  (1 - e^{-\beta_2  age})^{\beta_3}
+$$
+
+NLME:
+
+-   data grouped at pixel-level
+
+-   random parameter: $\beta_1$
+
+-   100 iterations
+:::
+
+::: {.column width="40%"}
+```{r, fig.asp=1, fig.width=3}
+
+ggplot(data=NULL) + 
+  geom_line(data=NULL, aes(x=1:150, y=CRdeclining(1:150, 700, 0.009 , 0.8)))+
+  geom_line(data=NULL, aes(x=1:150, y=CR(1:150, 200, 0.1 , 6)), color="red")+
+  labs(x="Age", y="e.g. AGB")
+
+```
+:::
+:::
+
+# Results
+
+
+##  {background-image="images/RSYC_results0_fhd.png" background-size="contain" background-repeat="no-repeat"}
+
+##  {background-image="images/RSYC_results1_fhd.png" background-size="contain" background-repeat="no-repeat"}
+
+##  {background-image="images/RSYC_results2_fhd.png" background-size="contain" background-repeat="no-repeat"}
+
+##  {background-image="images/RSYC_results3_fhd.png" background-size="contain" background-repeat="no-repeat"}
+
+##  {background-image="images/RSYC_results5_fhd.png" background-size="contain" background-repeat="no-repeat"}
+
+
+##  {fullscreen="true"}
+
+::: footer
+:::
+
+![](images/AGBoverTimeAnim.gif){fig-align="center"}
+
+
+## Summary statistics
+![](images/modelSummarystats_V4.png){fig-align="center"}
+
+
+## Validation
+
+::: footer
+:::
+
+Three types of comparison:
+
+::: columns
+
+::: {.column width="33%" .fragment}
+*Growth<br>simulator*
+![](images/valid_gypsy.png)
+:::
+
+::: {.column width="33%" .fragment}
+*Existing yield curves*
+![](images/valid_abyc.png)
+:::
+
+
+::: {.column width="33%" .fragment}
+*Permanent sample plots*
+![](images/valid_psp.png)
+:::
+
+
+:::
+
+
+
+
+
+## Validation
+
+::: columns
+::: {.column width="50%" .fragment}
+Comparison to existing *growth simulator*. ![](images/ComparisonToGYPSY.png)
+:::
+
+::: {.column width="50%" .fragment}
+Comparison to existing *yield curves*. ![](images/ComparisonToAlbertaYC.png)
+:::
+:::
+
+## Validation (*PSPs*)
+
+- uneven plot distribution (only 11 models validated against PSP data)
+- local adjustment to assess increment 
+
+
+![](images/Comparison_PSPsVSCurves.png)
+
+
+
+## Validation (*PSPs*)
+
+
+::: columns
+
+::: {.column width="45%" .text60}
+no-adjustment:
+
+- negative bias up to 30.7% 
+- RMSE between 22.6% and 70.3%
+
+
+![](images/validation_PSP_example_approach1.png)
+:::
+
+::: {.column width="10%" }
+:::
+
+
+::: {.column width="45%" .text60}
+with adjustment:
+
+- negative bias up to -30.0 t/ha 
+- RMSE below 30%
+
+![](images/validation_PSP_example_approach2.png)
+:::
+
+:::
+
+
+
+# Can we assign yield curves back to pixels?
+
+##  {.center}
+
+![](images/AGB_YC_anim3_v4_resized.gif)
+
+## Summary
+
+-   AGB yield curves derived using RS data only!
+-   Good agreement with existing growth and yield data
+-   Much more data to work with but filtering crucial for model development
+
+
+
+
+## Questions?
+
+::: columns
+
+
+
+::: {.column width="50%" .text60}
+More info:
+
+- Publication: [10.1016/j.foreco.2024.121894](https://www.sciencedirect.com/science/article/pii/S0378112724002068?via%3Dihub)
+
+- This presentation:  [github.com/ptompalski/RSYC-ForestSAT2024](https://github.com/ptompalski/RSYC-ForestSAT2024)
+
+- If interested - come and talk to me!
+:::
+
+::: {.column width="50%" }
+
+![](images/paper_frontpage.png)
+:::
+
+
+:::
+
+
+
+
+
+## References
+
+::: {#refs}
+:::
