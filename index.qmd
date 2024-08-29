@@ -112,14 +112,12 @@ NFCMARS is designed to:
 :::
 :::
 
-##  {.center fullscreen="true"}
 
-![](images/growthSimulatorsCanada.png)
-
-::: footer
-:::
 
 ## Existing models - limitations
+
+::: columns
+::: {.column width="50%" .text80}
 
 -   spatial extent (single jurisdiction, Canada-wide)
 
@@ -129,7 +127,16 @@ NFCMARS is designed to:
 
 -   often based on a limited number of samples
 
-## [Aim: remote sensing-based yield curves (RSYC)]{.r-fit-text}
+:::
+
+::: {.column width="50%"}
+![](images/growthSimulatorsCanada.png)
+:::
+
+:::
+
+
+## [Aim: **R**emote **S**ensing-based **Y**ield **C**urves (RSYC)]{.r-fit-text}
 
 -   Entire Canada <small>(all treed pixels)</small>
 
@@ -180,18 +187,6 @@ NFCMARS is designed to:
 ![](images/filteringSteps_Slides.png){.absolute top=0 right=0 height="100%"}
 
 
-## Filtering {visibility="hidden"}
-
-![](images/RSYC_filtering_4.png)
-
-## Filtering {visibility="hidden"}
-
-![](images/RSYC_filtering_4b.png)
-
-## Filtering {visibility="hidden"}
-
-![](images/ClassPixBroad.png)
-
 ## Modeling
 
 ::: columns
@@ -226,15 +221,18 @@ ggplot(data=NULL) +
 # Results
 
 
-##  {background-image="images/RSYC_results0_fhd.png" background-size="contain" background-repeat="no-repeat"}
+##  {transition="fade" transition-speed="slow" background-image="images/RSYC_results0_fhd.png" background-size="contain" background-repeat="no-repeat"}
 
-##  {background-image="images/RSYC_results1_fhd.png" background-size="contain" background-repeat="no-repeat"}
+##  {transition="fade" transition-speed="slow" background-image="images/RSYC_results1_fhd.png" background-size="contain" background-repeat="no-repeat" visibility="uncounted"}
 
-##  {background-image="images/RSYC_results2_fhd.png" background-size="contain" background-repeat="no-repeat"}
+##  {transition="fade" transition-speed="slow" background-image="images/RSYC_results2_fhd.png" background-size="contain" background-repeat="no-repeat" visibility="uncounted"}
 
-##  {background-image="images/RSYC_results3_fhd.png" background-size="contain" background-repeat="no-repeat"}
+##  {transition="fade" transition-speed="slow" background-image="images/RSYC_results3_fhd.png" background-size="contain" background-repeat="no-repeat" visibility="uncounted"}
 
-##  {background-image="images/RSYC_results5_fhd.png" background-size="contain" background-repeat="no-repeat"}
+##  {transition="fade" transition-speed="slow" background-image="images/RSYC_results5_fhd.png" background-size="contain" background-repeat="no-repeat" visibility="uncounted"}
+
+
+
 
 
 ##  {fullscreen="true"}
@@ -309,7 +307,7 @@ Comparison to existing *yield curves*. ![](images/ComparisonToAlbertaYC.png)
 ::: columns
 
 ::: {.column width="45%" .text60}
-no-adjustment:
+### no-adjustment:
 
 - negative bias up to 30.7% 
 - RMSE between 22.6% and 70.3%
@@ -323,7 +321,7 @@ no-adjustment:
 
 
 ::: {.column width="45%" .text60}
-with adjustment:
+### with adjustment:
 
 - negative bias up to -30.0 t/ha 
 - RMSE below 30%
@@ -343,9 +341,18 @@ with adjustment:
 
 ## Summary
 
--   AGB yield curves derived using RS data only!
--   Good agreement with existing growth and yield data
--   Much more data to work with but filtering crucial for model development
+::: {.fragment .fade-in}
+- AGB yield curves derived using RS data only!
+:::
+::: {.fragment .fade-in}
+- Good agreement with existing growth and yield data
+:::
+::: {.fragment .fade-in}
+- Validation challenging
+:::
+::: {.fragment .fade-in}
+- Much more data to work with but filtering crucial for model development
+:::
 
 
 
@@ -354,9 +361,7 @@ with adjustment:
 
 ::: columns
 
-
-
-::: {.column width="50%" .text60}
+::: {.column width="50%" .text80}
 More info:
 
 - Publication: [10.1016/j.foreco.2024.121894](https://www.sciencedirect.com/science/article/pii/S0378112724002068?via%3Dihub)
@@ -378,7 +383,22 @@ More info:
 
 
 
-## References
+## References {visibility="uncounted"}
 
 ::: {#refs}
 :::
+
+
+
+
+## Filtering {visibility="hidden"}
+
+![](images/RSYC_filtering_4.png)
+
+## Filtering {visibility="hidden"}
+
+![](images/RSYC_filtering_4b.png)
+
+## Filtering {visibility="hidden"}
+
+![](images/ClassPixBroad.png)

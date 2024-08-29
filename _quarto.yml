@@ -1,0 +1,5 @@
+project:
+  title: "index"
+  output-dir: docs
+
+editor: visual
