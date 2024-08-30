@@ -67,3 +67,10 @@ aside {
 .reveal small {
  vertical-align: middle !important; 
 }
+
+
+.reveal .footer {
+  text-align: left !important;
+  margin-left: 50px !important;
+  
+}

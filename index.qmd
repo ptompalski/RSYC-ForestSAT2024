@@ -62,9 +62,6 @@ Remote Sensing-based Aboveground Biomass Yield Curves for Dominant Boreal Tree s
 
 ## Yield curves & growth simulators
 
-::: {.notes}
-Speaker notes go here.
-:::
 
 ::: columns
 ::: {.column width="50%"}
@@ -96,7 +93,7 @@ ggplot(data=NULL) +
 :::
 :::
 
-## NFCMARS
+## Carbon accounting
 
 ::: columns
 ::: {.column width="60%"}
@@ -104,7 +101,7 @@ ggplot(data=NULL) +
 :::
 
 ::: {.column .text60 width="40%"}
-NFCMARS is designed to:
+National Forest Carbon Monitoring, Accounting and Reporting System (NFCMARS) is designed to:
 
 -   estimate past changes in forest carbon stocks, such as from 1990 to the present (**monitoring**)
 
@@ -146,7 +143,7 @@ NFCMARS is designed to:
 
 -   Locally representative
 
--   Fine level of detail
+-   Fine level of spatial detail
 
 -   Designed to work with RS data
 
@@ -159,7 +156,7 @@ NFCMARS is designed to:
 ::: text60
 -   Landsat-derived **AGB** time series (1984-2021) [@matasci_large-area_2018]
 -   Landsat-derived **age** [@maltman_estimating_2023]
--   Landsat-derived **species** [@hermosilla_mapping_2022]
+-   Landsat-derived dominant **species** [@hermosilla_mapping_2022]
 :::
 
 ## Study area
@@ -172,9 +169,9 @@ NFCMARS is designed to:
 ::: columns
 ::: {.column width="60%"}
 
--   build a chronosequence of AGB by combining multiple pixel-level AGB time series
--   develop a filtering approach to screen Landsat-derived AGB for unreasonably high values, growth rates etc
--   fit non-linear mix effects models (NLME)
+1. Build a chronosequence of AGB by combining multiple pixel-level AGB time series
+2. Develop a filtering approach to screen Landsat-derived AGB 
+3. Fit non-linear mixed effects models (NLME)
 
 :::
 
@@ -283,11 +280,11 @@ Three types of comparison:
 
 ::: columns
 ::: {.column width="50%" .fragment}
-Comparison to existing *growth simulator*. ![](images/ComparisonToGYPSY.png)
+Comparison to existing *growth simulator* ![](images/ComparisonToGYPSY.png)
 :::
 
 ::: {.column width="50%" .fragment}
-Comparison to existing *yield curves*. ![](images/ComparisonToAlbertaYC.png)
+Comparison to existing *yield curves* ![](images/ComparisonToAlbertaYC.png)
 :::
 :::
 
@@ -348,10 +345,10 @@ Comparison to existing *yield curves*. ![](images/ComparisonToAlbertaYC.png)
 - Good agreement with existing growth and yield data
 :::
 ::: {.fragment .fade-in}
-- Validation challenging
+- Validation of derived yield curves challenging
 :::
 ::: {.fragment .fade-in}
-- Much more data to work with but filtering crucial for model development
+- RS provides more data for model development, but data filtering is crucial
 :::
 
 

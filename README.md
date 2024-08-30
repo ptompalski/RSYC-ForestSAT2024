@@ -1,6 +1,7 @@
 # RSYC-ForestSAT2024
 Presentation on Remote Sensing-based Yield Curves (RSYC) that will be delivered at the [ForestSAT 2024 conference](https://tcc.eventsair.com/fsat24/) in Rotorua, New Zealand (9-13 September, 2024)
 
+**[https://ptompalski.github.io/RSYC-ForestSAT2024/](https://ptompalski.github.io/RSYC-ForestSAT2024/)**
 
 
 Related publication (open access):
