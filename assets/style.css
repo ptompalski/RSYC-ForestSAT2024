@@ -70,7 +70,17 @@ aside {
 
 
 .reveal .footer {
+  font-size: 35% !important;
   text-align: left !important;
-  margin-left: 50px !important;
+  margin-left: 20px !important;
+  opacity: 50% !important;
   
+}
+
+.slide-number {
+  opacity: 50% !important;
+}
+
+.slide-menu-button {
+  opacity: 0% !important;
 }

@@ -6,7 +6,7 @@ format:
     self-contained: true
     theme: simple
     embed-resources: true
-    logo: images\NRCan_CFS_logo_PT_englishOnly_small.png
+    # logo: images\NRCan_CFS_logo_PT_englishOnly_small.png
     footer: "Tompalski et al., Remote Sensing-based Yield Curves | piotr.tompalski@nrcan-rncan.gc.ca"
     margin: 0.1
     slide-number: true
@@ -234,8 +234,6 @@ ggplot(data=NULL) +
 
 ##  {fullscreen="true"}
 
-::: footer
-:::
 
 ![](images/AGBoverTimeAnim.gif){fig-align="center"}
 
@@ -246,8 +244,6 @@ ggplot(data=NULL) +
 
 ## Validation
 
-::: footer
-:::
 
 Three types of comparison:
 
