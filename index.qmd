@@ -113,6 +113,10 @@ National Forest Carbon Monitoring, Accounting and Reporting System (NFCMARS) is 
 
 ## Existing models - limitations
 
+::: {.notes}
+there are over 100 Mha of forest for which we have no yield curves. And while we do not need to report on those forests, it is of great scientific interest to also quantify the C balance of those forests, as is the plan for the next generation system.  The curves developed in this project will enable national-scale coverage, inculding unmanaged forests
+:::
+
 ::: columns
 ::: {.column width="50%" .text80}
 
@@ -127,7 +131,7 @@ National Forest Carbon Monitoring, Accounting and Reporting System (NFCMARS) is 
 :::
 
 ::: {.column width="50%"}
-![](images/growthSimulatorsCanada.png)
+![](images/growthSimulatorsCanada_v2.png)
 :::
 
 :::
@@ -245,7 +249,7 @@ ggplot(data=NULL) +
 ## Validation
 
 
-Three types of comparison:
+Three types of comparisons:
 
 ::: columns
 
@@ -316,7 +320,7 @@ Comparison to existing *yield curves* ![](images/ComparisonToAlbertaYC.png)
 ::: {.column width="45%" .text60}
 ### with adjustment:
 
-- negative bias up to -30.0 t/ha 
+- negative bias up to 30.0 t/ha 
 - RMSE below 30%
 
 ![](images/validation_PSP_example_approach2.png)
